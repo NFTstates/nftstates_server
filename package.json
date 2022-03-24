@@ -1,0 +1,27 @@
+{
+  "name": "nftstates_server",
+  "version": "1.0.0",
+  "description": "nftfi",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NFTstates/nftstates_server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NFTstates/nftstates_server/issues"
+  },
+  "homepage": "https://github.com/NFTstates/nftstates_server#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "prettier": "^2.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
