@@ -1,22 +1,33 @@
 require("dotenv").config();
 
 const express = require("express");
-const path = require("path");
+// const path = require("path");
+
+// Constants
+const PORT = 8080;
+
+// APP
 const app = express();
+const productRoutes = require("./routes");
+app.use(express.json());
+
 const MongoClient = require("mongodb").MongoClient;
+app.use(express.urlencoded({ extended: false }));
 
-var db;
+app.use("/api/products", productRoutes);
+
 MongoClient.connect(
-  "mongodb+srv://nftstates:4254@nftstates.9lvwf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-  function (err, client) {
-    if (err) return console.log(err);
-
-    db = client.db("sample_geospatial");
-    app.listen(process.env.PORT, function () {
-      console.log("listening on 8080");
-    });
+  process.env.MONGODB_URI,
+  (err) => {
+    if (err) {
+      console.log(err);
+    }else{
+      console.log('mongodb connected...')
+    }
   }
 );
+app.listen(PORT, ()=>{
+  console.log(`Running on http://localhost:${PORT}`);
+});
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+
