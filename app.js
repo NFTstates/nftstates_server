@@ -1,23 +1,17 @@
 require("dotenv").config();
-
 const express = require("express");
-// const path = require("path");
 
-// Constants
 const PORT = 8080;
-
-// APP
 const app = express();
-const productRoutes = require("./routes");
-app.use(express.json());
+const routes = require("./routes");
+const mongoose = require('mongoose')
 
-const MongoClient = require("mongodb").MongoClient;
-app.use(express.urlencoded({ extended: false }));
-
-app.use("/api/products", productRoutes);
-
-MongoClient.connect(
+mongoose.connect(
   process.env.MONGODB_URI,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
   (err) => {
     if (err) {
       console.log(err);
@@ -26,6 +20,13 @@ MongoClient.connect(
     }
   }
 );
+
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+// app.use("/api/products", routes);
+app.use("/api/loans", routes);
+
 app.listen(PORT, ()=>{
   console.log(`Running on http://localhost:${PORT}`);
 });
